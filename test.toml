@@ -1,0 +1,38 @@
+# Test Configuration for Lambda Selenium/Playwright
+
+[chrome]
+version = "stable"  # Options: "stable", "beta", "114.0.5735.90"
+binary_location = "/usr/bin/google-chrome"
+chromedriver_path = "/usr/local/bin/chromedriver"
+
+[chrome.options]
+headless = true
+no_sandbox = true
+disable_dev_shm_usage = true
+disable_gpu = true
+single_process = true
+
+[lambda]
+function_name = "selenium-playwright-test"
+region = "us-east-1"
+memory_size = 2048
+timeout = 300
+runtime = "python3.11"
+
+[ecr]
+repository_name = "lambda-selenium-repo"
+image_tag = "latest"
+
+[selenium]
+implicit_wait = 10
+page_load_timeout = 30
+
+[playwright]
+browser = "chromium"  # Options: "chromium", "firefox", "webkit"
+headless = true
+timeout = 30000
+
+[pytest]
+verbosity = 2
+markers = ["selenium", "playwright", "smoke", "regression"]
+test_paths = ["tests/"]
